@@ -1,0 +1,42 @@
+<!-- ============================================================
+     pages/fuel.html  (partial — included by index.html)
+     ============================================================ -->
+
+<!-- PAGE: FUEL -->
+<div class="page" id="page-fuel">
+  <div class="sub-topbar">
+    <button class="back-btn" onclick="goTo('page-home')">‹</button>
+    <div>
+      <div class="sub-title">เติมน้ำมัน</div>
+      <div class="sub-sub" id="fuel-sub"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="tab-row">
+      <button class="tab-btn at" onclick="swTab('fuel','form',this)">บันทึกใหม่</button>
+      <button class="tab-btn"    onclick="swTab('fuel','hist',this)">ประวัติ</button>
+    </div>
+    <div id="fuel-form">
+      <div class="form-group">
+        <label class="form-label">ราคาน้ำมันวันนั้น (บาท/ลิตร) *</label>
+        <input class="form-input" type="number" step="0.01" placeholder="เช่น 24.50" id="f-ppl" oninput="calcFuel()"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">วันที่เติม *</label>
+        <input class="form-input" type="date" id="f-date"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ราคาที่เติม (บาท) *</label>
+        <input class="form-input" type="number" step="0.01" placeholder="เช่น 500" id="f-total" oninput="calcFuel()"/>
+      </div>
+      <div class="calc-box">
+        <span class="calc-lbl">💧 ได้น้ำมัน</span>
+        <span class="calc-val" id="calc-liters">— ลิตร</span>
+      </div>
+      <button class="btn-primary" onclick="saveFuel()">บันทึก</button>
+    </div>
+    <div id="fuel-hist" style="display:none">
+      <div id="fuel-hist-list"></div>
+    </div>
+  </div>
+</div>

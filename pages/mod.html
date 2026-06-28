@@ -1,0 +1,46 @@
+<!-- ============================================================
+     pages/mod.html  (partial — included by index.html)
+     ============================================================ -->
+
+<!-- PAGE: MOD -->
+<div class="page" id="page-mod">
+  <div class="sub-topbar">
+    <button class="back-btn" onclick="goTo('page-home')">‹</button>
+    <div>
+      <div class="sub-title">แต่งรถ</div>
+      <div class="sub-sub" id="mod-sub"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="tab-row">
+      <button class="tab-btn at" onclick="swTab('mod','form',this)">บันทึกใหม่</button>
+      <button class="tab-btn"    onclick="swTab('mod','hist',this)">ประวัติ</button>
+    </div>
+    <div id="mod-form">
+      <div class="form-group">
+        <label class="form-label">วันที่แต่ง *</label>
+        <input class="form-input" type="date" id="m-date"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ของที่แต่ง *</label>
+        <input class="form-input" type="text" placeholder="เช่น ล้อแม็ก, ฟิล์มกรองแสง, ชุดสี" id="m-item"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">แต่งที่ไหน</label>
+        <input class="form-input" type="text" placeholder="เช่น ร้านแต่งรถสุพรรณ" id="m-shop"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ราคา (บาท)</label>
+        <input class="form-input" type="number" step="0.01" placeholder="เช่น 3500" id="m-cost"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">รายละเอียดเพิ่มเติม</label>
+        <input class="form-input" type="text" placeholder="รุ่น / สี / หมายเหตุ" id="m-note"/>
+      </div>
+      <button class="btn-primary" onclick="saveMod()">บันทึก</button>
+    </div>
+    <div id="mod-hist" style="display:none">
+      <div id="mod-hist-list"></div>
+    </div>
+  </div>
+</div>

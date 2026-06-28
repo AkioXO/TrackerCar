@@ -1,0 +1,65 @@
+<!-- ============================================================
+     pages/dashboard.html  (partial — included by index.html)
+     ============================================================ -->
+
+<!-- PAGE: DASHBOARD -->
+<div class="page" id="page-home">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="brand-icon">🚗</div>
+      <div>
+        <div class="brand-title" id="dash-title">MyCar Tracker</div>
+        <div class="brand-sub"   id="dash-sub"></div>
+      </div>
+    </div>
+    <button class="icon-btn" onclick="goTo('page-cars')" title="เปลี่ยนรถ">⇄</button>
+  </div>
+  <div class="content">
+    <div class="lbl" style="margin-top:.25rem">สรุปภาพรวม</div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val" id="st-fuel">฿0</div><div class="stat-lbl">น้ำมันเดือนนี้</div></div>
+      <div class="stat-box"><div class="stat-val" id="st-mod">฿0</div><div class="stat-lbl">แต่งรถรวม</div></div>
+      <div class="stat-box"><div class="stat-val" id="st-maint">฿0</div><div class="stat-lbl">บำรุงรักษารวม</div></div>
+    </div>
+
+    <div class="lbl">เมนูหลัก</div>
+    <div class="menu-grid">
+      <button class="menu-card" onclick="goTo('page-fuel')">
+        <div class="ci ci-f">⛽</div>
+        <div class="card-name">เติมน้ำมัน</div>
+        <div class="card-desc">บันทึกทุกครั้งที่เติม</div>
+        <span class="card-arr">›</span>
+      </button>
+      <button class="menu-card" onclick="goTo('page-mod')">
+        <div class="ci ci-m">🔧</div>
+        <div class="card-name">แต่งรถ</div>
+        <div class="card-desc">ติดตามการอัปเกรด</div>
+        <span class="card-arr">›</span>
+      </button>
+      <button class="menu-card" onclick="goTo('page-maint')">
+        <div class="ci ci-mn">⚙️</div>
+        <div class="card-name">บำรุงรักษา</div>
+        <div class="card-desc">เปลี่ยนน้ำมัน ฯลฯ</div>
+        <span class="card-arr">›</span>
+      </button>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="chart-head">
+        <span class="chart-title">ค่าใช้จ่ายรายเดือน</span>
+        <select class="yr-sel" id="chart-year" onchange="renderChart()"></select>
+      </div>
+      <div class="legend-row">
+        <div class="leg-item"><div class="leg-sq" style="background:#eda100"></div>น้ำมัน</div>
+        <div class="leg-item"><div class="leg-sq" style="background:#4a3aa7"></div>แต่งรถ</div>
+        <div class="leg-item"><div class="leg-sq" style="background:#1baf7a"></div>บำรุงรักษา</div>
+      </div>
+      <div style="position:relative;width:100%;height:220px">
+        <canvas id="expense-chart" role="img" aria-label="กราฟค่าใช้จ่ายรายเดือน แบ่งตามหมวดหมู่"></canvas>
+      </div>
+    </div>
+
+    <div class="lbl">รายการล่าสุด</div>
+    <div id="home-recent"><div class="empty">ยังไม่มีรายการ</div></div>
+  </div>
+</div>

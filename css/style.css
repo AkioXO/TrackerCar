@@ -1,0 +1,758 @@
+/* ============================================================
+   MyCar Tracker — Main Stylesheet
+   ============================================================ */
+
+:root {
+  --bg: #f4f4f2;
+  --surface: #ffffff;
+  --surface2: #f8f8f7;
+  --border: rgba(0,0,0,0.10);
+  --border-strong: rgba(0,0,0,0.18);
+  --text: #0b0b0b;
+  --text-sec: #52514e;
+  --text-muted: #898781;
+  --accent: #2a78d6;
+  --accent-bg: #e6f1fb;
+  --accent-text: #185fa5;
+  --accent-border: #b5d4f4;
+  --success: #1baf7a;
+  --success-bg: #e1f5ee;
+  --success-text: #0f6e56;
+  --warning: #eda100;
+  --warning-bg: #faeeda;
+  --warning-text: #854f0b;
+  --danger: #e34948;
+  --danger-bg: #fcebeb;
+  --danger-text: #a32d2d;
+  --pro: #4a3aa7;
+  --pro-bg: #eeedfe;
+  --pro-text: #3c3489;
+  --radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111110;
+    --surface: #1e1e1c;
+    --surface2: #252523;
+    --border: rgba(255,255,255,0.10);
+    --border-strong: rgba(255,255,255,0.18);
+    --text: #f5f5f4;
+    --text-sec: #c3c2b7;
+    --text-muted: #898781;
+    --accent: #3987e5;
+    --accent-bg: #0c2040;
+    --accent-text: #85b7eb;
+    --accent-border: #185fa5;
+    --success-bg: #04342c;
+    --success-text: #5dcaa5;
+    --warning-bg: #412402;
+    --warning-text: #fac775;
+    --danger-bg: #501313;
+    --danger-text: #f09595;
+    --pro-bg: #26215c;
+    --pro-text: #afa9ec;
+  }
+}
+
+/* RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.page { display: none; }
+.page.active { display: block; }
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--border);
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.topbar-left { display: flex; align-items: center; gap: 10px; }
+.brand-icon {
+  width: 36px; height: 36px;
+  background: var(--accent-bg);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  font-size: 18px;
+}
+.brand-title { font-size: 15px; font-weight: 600; color: var(--text); }
+.brand-sub  { font-size: 11px; color: var(--text-muted); }
+
+.icon-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted); font-size: 20px; padding: 6px;
+  border-radius: var(--radius);
+  display: flex; align-items: center;
+  transition: background .15s;
+}
+.icon-btn:hover { background: var(--bg); color: var(--text-sec); }
+
+.content { padding: 1.25rem; max-width: 640px; margin: 0 auto; }
+
+.sub-topbar {
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--border);
+  padding: 0.875rem 1.25rem;
+  display: flex; align-items: center; gap: 12px;
+  position: sticky; top: 0; z-index: 10;
+}
+.back-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-sec); font-size: 20px; padding: 4px;
+  border-radius: var(--radius);
+  display: flex; align-items: center;
+  transition: background .15s;
+}
+.back-btn:hover { background: var(--bg); }
+.sub-title { font-size: 15px; font-weight: 600; color: var(--text); }
+.sub-sub   { font-size: 11px; color: var(--text-muted); }
+
+/* ============================================================
+   SECTION LABEL
+   ============================================================ */
+.lbl {
+  font-size: 11px; font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: .75rem;
+}
+
+/* ============================================================
+   CAR GRID
+   ============================================================ */
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+.car-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  transition: border-color .15s, transform .1s;
+}
+.car-card:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+.car-card.selected { border: 2px solid var(--accent); background: var(--accent-bg); }
+
+.car-av  {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.car-av-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.car-name  { font-size: 13px; font-weight: 600; color: var(--text); }
+.car-plate { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+.car-del {
+  position: absolute; top: 8px; right: 8px;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted); font-size: 15px; padding: 4px;
+  border-radius: var(--radius);
+  opacity: 0; transition: opacity .15s; line-height: 1;
+}
+.car-card:hover .car-del { opacity: 1; }
+.car-del:hover { color: var(--danger); background: var(--danger-bg); }
+
+.add-car-btn {
+  border: 1px dashed var(--border-strong);
+  border-radius: 12px;
+  background: none; cursor: pointer;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 12px; font-family: inherit;
+  min-height: 100px;
+  transition: border-color .15s, color .15s;
+}
+.add-car-btn:hover { border-color: var(--accent); color: var(--accent); }
+.add-car-btn svg  { width: 22px; height: 22px; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary {
+  width: 100%; padding: 10px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: var(--radius);
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  transition: opacity .15s;
+}
+.btn-primary:hover { opacity: .88; }
+.btn-primary:disabled {
+  background: var(--border-strong);
+  color: var(--text-muted);
+  cursor: not-allowed; opacity: 1;
+}
+.btn-outline {
+  padding: 8px 16px;
+  background: none;
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--text-sec); cursor: pointer;
+  font-size: 13px; font-family: inherit;
+  transition: background .15s;
+}
+.btn-outline:hover { background: var(--bg); }
+.btn-danger {
+  padding: 8px 16px;
+  background: var(--danger); color: #fff;
+  border: none; border-radius: var(--radius);
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: inherit;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 100;
+  align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 1.5rem;
+  width: 100%; max-width: 320px;
+}
+.modal-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 1.125rem; }
+.modal-btns  { display: flex; gap: 8px; margin-top: 1rem; }
+.modal-btns .btn-outline  { flex: 1; }
+.modal-btns .btn-danger   { flex: 2; }
+.modal-btns .btn-primary  { flex: 2; padding: 8px; }
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.form-group  { margin-bottom: 1rem; }
+.form-label  { font-size: 12px; color: var(--text-sec); margin-bottom: 5px; display: block; font-weight: 500; }
+.form-input  {
+  width: 100%; padding: 9px 12px;
+  background: var(--surface);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--text); font-size: 14px; font-family: inherit;
+  transition: border-color .15s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(42,120,214,.12);
+}
+
+/* ---- Photo URL field (Add/Edit car) ---- */
+.photo-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.photo-input-row .form-input { flex: 1; }
+.photo-preview {
+  width: 42px; height: 42px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--surface2);
+  border: 0.5px solid var(--border-strong);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  overflow: hidden;
+}
+.photo-preview img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   CALC BOX
+   ============================================================ */
+.calc-box {
+  background: var(--success-bg);
+  border: 0.5px solid rgba(15,110,86,.25);
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+  margin-bottom: 1rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.calc-lbl { font-size: 13px; color: var(--success-text); }
+.calc-val  { font-size: 18px; font-weight: 700; color: var(--success-text); }
+
+/* ============================================================
+   STATS
+   ============================================================ */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+.stat-box { background: var(--surface2); border-radius: var(--radius); padding: .875rem; }
+.stat-val  { font-size: 17px; font-weight: 700; color: var(--text); }
+.stat-lbl  { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+/* ============================================================
+   MENU CARDS
+   ============================================================ */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+.menu-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.125rem 1rem;
+  cursor: pointer;
+  transition: border-color .15s, transform .1s;
+  display: flex; flex-direction: column;
+  gap: 8px; text-align: left; position: relative;
+}
+.menu-card:hover  { border-color: var(--border-strong); transform: translateY(-1px); }
+.menu-card:active { transform: scale(.98); }
+
+.ci { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.ci-f  { background: var(--warning-bg); }
+.ci-m  { background: var(--pro-bg); }
+.ci-mn { background: var(--success-bg); }
+
+.card-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.card-desc { font-size: 11px; color: var(--text-muted); }
+.card-arr  { position: absolute; top: 1rem; right: 1rem; color: var(--text-muted); font-size: 14px; }
+
+/* ============================================================
+   CHART
+   ============================================================ */
+.chart-wrap {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.125rem;
+  margin-bottom: 1.25rem;
+}
+.chart-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: .875rem;
+}
+.chart-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.yr-sel {
+  padding: 4px 8px;
+  background: var(--surface2);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--text-sec); font-size: 12px; font-family: inherit;
+  cursor: pointer;
+}
+.legend-row { display: flex; gap: 14px; margin-bottom: .75rem; flex-wrap: wrap; }
+.leg-item   { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-sec); }
+.leg-sq     { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+/* ============================================================
+   TABS
+   ============================================================ */
+.tab-row { display: flex; gap: 8px; margin-bottom: 1.25rem; }
+.tab-btn {
+  flex: 1; padding: 8px;
+  background: var(--surface2);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px; color: var(--text-sec);
+  cursor: pointer; font-family: inherit;
+  transition: background .15s;
+}
+.tab-btn.at {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+/* ============================================================
+   HISTORY
+   ============================================================ */
+.hist-item {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: .875rem 1rem;
+  margin-bottom: 8px;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.hi { flex: 1; min-width: 0; }
+.ht { font-size: 13px; font-weight: 600; color: var(--text); }
+.hs { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+.ha { font-size: 13px; font-weight: 700; white-space: nowrap; }
+.ha-f  { color: var(--warning-text); }
+.ha-m  { color: var(--pro-text); }
+.ha-mn { color: var(--success-text); }
+
+/* ============================================================
+   RECENT LIST
+   ============================================================ */
+.rrow {
+  display: flex; align-items: center; gap: 10px;
+  padding: .6rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.rrow:last-child { border-bottom: none; }
+.rdot  { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.df    { background: var(--warning); }
+.dm    { background: var(--pro); }
+.dmn   { background: var(--success); }
+.ri    { flex: 1; min-width: 0; }
+.rt    { font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rd    { font-size: 11px; color: var(--text-muted); }
+.rv    { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; }
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast {
+  position: fixed; bottom: 1.5rem; left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--text); color: var(--bg);
+  border-radius: 20px; padding: .5rem 1.125rem;
+  font-size: 13px; font-weight: 500;
+  white-space: nowrap; opacity: 0;
+  transition: opacity .25s, transform .25s;
+  pointer-events: none; z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* MISC */
+.empty { text-align: center; padding: 2.5rem 1rem; color: var(--text-muted); font-size: 13px; }
+.section-gap { margin-top: .25rem; }
+
+/* ============================================================
+   NEW FEATURES — v2
+   ============================================================ */
+
+/* ---- Dashboard button (icon + label) ---- */
+.dash-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  background: var(--accent-bg);
+  color: var(--accent-text);
+  border: 0.5px solid var(--accent-border);
+  border-radius: 20px;
+}
+.dash-btn:hover { background: var(--accent-border); color: var(--accent-text); }
+
+/* ---- Car card v2: click to enter, no select btn ---- */
+.car-card {
+  cursor: pointer;
+  transition: border-color .15s, transform .1s, box-shadow .15s;
+}
+.car-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(42,120,214,.12);
+}
+.car-enter-hint {
+  font-size: 10px;
+  color: var(--accent-text);
+  margin-top: 6px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.car-card:hover .car-enter-hint { opacity: 1; }
+
+/* ---- Car action buttons (edit + delete) ---- */
+.car-actions {
+  position: absolute;
+  top: 8px; right: 8px;
+  display: flex;
+  gap: 3px;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.car-card:hover .car-actions { opacity: 1; }
+.car-action-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 13px; padding: 3px 4px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: background .15s;
+}
+.car-edit-btn:hover { background: var(--accent-bg); }
+.car-del-btn:hover  { background: var(--danger-bg); }
+
+/* ---- STATUS POPUP ---- */
+.modal-status-box {
+  text-align: center;
+  max-width: 280px;
+}
+.status-icon {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 700;
+  margin: 0 auto 1rem;
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+.status-success .status-icon { background: var(--success-bg); color: var(--success-text); }
+.status-error   .status-icon { background: var(--danger-bg);  color: var(--danger-text);  }
+.status-warning .status-icon { background: var(--warning-bg); color: var(--warning-text); }
+.status-msg {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: .25rem;
+  line-height: 1.5;
+}
+
+/* ---- DETAIL POPUP ---- */
+.modal-detail-box { max-width: 340px; }
+.modal-detail-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 1.125rem;
+}
+.modal-detail-icon {
+  width: 44px; height: 44px;
+  background: var(--surface2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.detail-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.detail-grid { display: flex; flex-direction: column; gap: 6px; }
+.detail-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .5rem .75rem;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+.detail-row span { color: var(--text-muted); }
+.detail-row strong { color: var(--text); }
+.detail-total {
+  background: var(--accent-bg);
+  border: 0.5px solid var(--accent-border);
+}
+.detail-total span,
+.detail-total strong { color: var(--accent-text); }
+
+/* ---- HISTORY clickable rows ---- */
+.hist-clickable { cursor: pointer; transition: background .12s; }
+.hist-clickable:hover { background: var(--surface2); }
+.hist-arrow {
+  color: var(--text-muted);
+  font-size: 16px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* ---- ANALYTICS PAGE ---- */
+.analytics-filters {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+.filter-row { display: flex; gap: 10px; }
+
+.an-period {
+  font-size: 20px; font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.an-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+.an-stat {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: .875rem .75rem;
+  text-align: center;
+}
+.an-fuel  { border-top: 3px solid var(--warning); }
+.an-maint { border-top: 3px solid var(--success); }
+.an-mod   { border-top: 3px solid var(--pro); }
+.an-stat-icon  { font-size: 18px; margin-bottom: 4px; }
+.an-stat-label { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
+.an-stat-val   { font-size: 14px; font-weight: 700; color: var(--text); }
+.an-stat-count { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+.an-total-box {
+  background: var(--accent-bg);
+  border: 0.5px solid var(--accent-border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .25rem;
+}
+.an-total-lbl { font-size: 13px; font-weight: 600; color: var(--accent-text); }
+.an-total-val { font-size: 20px; font-weight: 700; color: var(--accent-text); }
+
+.an-row {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: .75rem 1rem;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.an-row-info { flex: 1; min-width: 0; }
+.an-row-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.an-row-date  { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.an-row-val { font-size: 13px; font-weight: 700; white-space: nowrap; }
+.an-f  { color: var(--warning-text); }
+.an-mn { color: var(--success-text); }
+.an-m  { color: var(--pro-text); }
+
+/* ============================================================
+   NEW FEATURES — v3 (Admin Login & History Edit/Delete)
+   ============================================================ */
+
+/* ---- History action buttons (edit/delete on fuel/mod/maint rows) ---- */
+.hist-item { gap: 10px; }
+.hist-actions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+  align-self: center;
+}
+.hist-action-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 13px; padding: 5px 6px;
+  border-radius: 6px; line-height: 1;
+  color: var(--text-muted);
+  transition: background .15s;
+}
+.hist-action-btn:hover     { background: var(--accent-bg); }
+.hist-action-del:hover     { background: var(--danger-bg); }
+
+/* ---- Admin lock badge (topbar) ---- */
+.admin-badge { font-size: 16px; }
+.admin-badge.on { color: var(--success-text); }
+.admin-badge.on:hover { background: var(--success-bg); }
+
+/* ---- PIN PAD (Admin Login / Change PIN) ---- */
+.modal-login-box { max-width: 300px; text-align: center; }
+.login-icon {
+  width: 52px; height: 52px;
+  background: var(--accent-bg);
+  color: var(--accent-text);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin: 0 auto .75rem;
+}
+.login-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+.pin-dots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: .5rem;
+}
+.pin-dots.shake { animation: pin-shake .4s; }
+@keyframes pin-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px); }
+  60%      { transform: translateX(-6px); }
+  80%      { transform: translateX(6px); }
+}
+.pin-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+  background: transparent;
+  transition: background .15s, border-color .15s, transform .15s;
+}
+.pin-dot.filled {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+.pin-error {
+  min-height: 16px;
+  font-size: 12px;
+  color: var(--danger-text);
+  margin-bottom: .75rem;
+}
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: .25rem;
+}
+.pin-key {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 0.5px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
+  font-size: 18px; font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .12s, transform .08s, border-color .12s;
+}
+.pin-key:hover  { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-border); }
+.pin-key:active { transform: scale(.92); background: var(--accent-bg); }
+.pin-key-ghost  { background: none; border: none; cursor: default; }
+.pin-key-ghost:hover,
+.pin-key-ghost:active { background: none; transform: none; }
+.pin-key-del {
+  font-size: 16px;
+  color: var(--text-muted);
+  background: none; border: none;
+}
+.pin-key-del:hover  { background: var(--danger-bg); color: var(--danger-text); }
+.pin-key-del:active { background: var(--danger-bg); transform: scale(.92); }

@@ -1,0 +1,47 @@
+<!-- ============================================================
+     pages/maint.html  (partial — included by index.html)
+     ============================================================ -->
+
+<!-- PAGE: MAINTENANCE -->
+<div class="page" id="page-maint">
+  <div class="sub-topbar">
+    <button class="back-btn" onclick="goTo('page-home')">‹</button>
+    <div>
+      <div class="sub-title">บำรุงรักษา</div>
+      <div class="sub-sub" id="maint-sub"></div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="tab-row">
+      <button class="tab-btn at" onclick="swTab('maint','form',this)">บันทึกใหม่</button>
+      <button class="tab-btn"    onclick="swTab('maint','hist',this)">ประวัติ</button>
+    </div>
+    <div id="maint-form">
+      <div class="form-group">
+        <label class="form-label">วันที่เข้ารับบริการ *</label>
+        <input class="form-input" type="date" id="mn-date"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">สิ่งที่ทำ *</label>
+        <input class="form-input" type="text"
+          placeholder="เช่น เปลี่ยนน้ำมันเครื่อง, เปลี่ยนยาง, ตรวจเช็คระยะ" id="mn-item"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ที่ไหน</label>
+        <input class="form-input" type="text" placeholder="เช่น Toyota Service, อู่ใกล้บ้าน" id="mn-shop"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ราคา (บาท)</label>
+        <input class="form-input" type="number" step="0.01" placeholder="เช่น 1200" id="mn-cost"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">รายละเอียดเพิ่มเติม</label>
+        <input class="form-input" type="text" placeholder="รายละเอียด / หมายเหตุ" id="mn-note"/>
+      </div>
+      <button class="btn-primary" onclick="saveMaint()">บันทึก</button>
+    </div>
+    <div id="maint-hist" style="display:none">
+      <div id="maint-hist-list"></div>
+    </div>
+  </div>
+</div>

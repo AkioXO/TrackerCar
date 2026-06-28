@@ -1,0 +1,64 @@
+<!-- ============================================================
+     pages/cars.html  (partial — included by index.html)
+     ============================================================ -->
+
+<!-- PAGE: CAR SELECT -->
+<div class="page active" id="page-cars">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="brand-icon">🚗</div>
+      <div>
+        <div class="brand-title">MyCar Tracker</div>
+        <div class="brand-sub">เลือกรถที่ต้องการ</div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="lbl" style="margin-top:.25rem">รถของคุณ</div>
+    <div class="car-grid" id="car-grid"></div>
+    <button class="btn-primary" id="sel-car-btn" onclick="selectCar()" disabled>เลือกรถนี้</button>
+  </div>
+</div>
+
+<!-- MODAL: ADD CAR -->
+<div class="modal-overlay" id="modal-add">
+  <div class="modal">
+    <div class="modal-title">เพิ่มรถใหม่</div>
+    <div class="form-group">
+      <label class="form-label">ชื่อรถ / รุ่น *</label>
+      <input class="form-input" id="nc-name" placeholder="เช่น Toyota Yaris Ativ"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">ทะเบียน</label>
+      <input class="form-input" id="nc-plate" placeholder="เช่น กข 1234"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">สีรถ</label>
+      <select class="form-input" id="nc-color">
+        <option value="warning">⚪ ขาว / เงิน</option>
+        <option value="accent">🔵 น้ำเงิน / ดำ</option>
+        <option value="success">🟢 เขียว</option>
+        <option value="pro">🟣 ม่วง / ชมพู</option>
+        <option value="danger">🔴 แดง / ส้ม</option>
+      </select>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-outline" onclick="closeModal('modal-add')">ยกเลิก</button>
+      <button class="btn-primary" onclick="saveNewCar()">เพิ่มรถ</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CONFIRM DELETE -->
+<div class="modal-overlay" id="modal-confirm">
+  <div class="modal">
+    <div class="modal-title">ลบรถนี้?</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:.25rem" id="confirm-txt">
+      ข้อมูลทั้งหมดของรถคันนี้จะถูกลบถาวร
+    </p>
+    <div class="modal-btns">
+      <button class="btn-outline" onclick="closeModal('modal-confirm')">ยกเลิก</button>
+      <button class="btn-danger"  onclick="confirmDel()">ลบ</button>
+    </div>
+  </div>
+</div>
